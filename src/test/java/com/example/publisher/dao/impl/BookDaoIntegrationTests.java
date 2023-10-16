@@ -82,6 +82,7 @@ public class BookDaoIntegrationTests {
         underTest.delete(book1.getIsbn());
         underTest.findOne(book1.getIsbn());
         Optional<Book> result = underTest.findOne(book1.getIsbn());
+
         // assertThat(result).isEmpty();
     }
 }
