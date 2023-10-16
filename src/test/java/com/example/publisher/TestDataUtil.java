@@ -17,7 +17,7 @@ public final class TestDataUtil {
         return Author.builder()
                 .id(2L)
                 .name("Jones stones")
-                .age(29)
+                .age(50)
                 .build();
     }
 
@@ -25,29 +25,29 @@ public final class TestDataUtil {
         return Author.builder()
                 .id(3L)
                 .name("Jones stones")
-                .age(29)
+                .age(80)
                 .build();
     }
-    public static Book createBook() {
+    public static Book createBook(final Author author) {
         return Book.builder()
                 .isbn("1982-1-234-567")
                 .title("Jones is a stone")
-                .authorId(1L)
+                .author(author)
                 .build();
     }
 
-    public static Book createBook1() {
+    public static Book createBook1(final Author author) {
         return Book.builder()
                 .isbn("1982-1-234-5670")
                 .title("Jones stone")
-                .authorId(1L)
+                .author(author)
                 .build();
     }
-    public static Book createBook2() {
+    public static Book createBook2(final Author author) {
         return Book.builder()
                 .isbn("1982-1-234-5671")
                 .title("Jones a stone")
-                .authorId(1L)
+                .author(author)
                 .build();
     }
 }
