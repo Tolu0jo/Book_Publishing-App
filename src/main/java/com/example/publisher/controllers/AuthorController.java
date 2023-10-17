@@ -6,10 +6,12 @@ import com.example.publisher.entitities.AuthorEntity;
 import com.example.publisher.mappers.Mapper;
 import com.example.publisher.services.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RequestMapping(path = "/api/authors")
@@ -26,11 +28,18 @@ public class AuthorController {
    }
 
     @PostMapping
-    public AuthorDto createAuthor(@RequestBody AuthorDto author) {
+    public ResponseEntity<AuthorDto> createAuthor(@RequestBody AuthorDto author) {
        //converting Dtos to entity
        AuthorEntity authorEntity = authorMapper.mapFrom(author);
        AuthorEntity savedAuthorEntity = authorService.createAuthor(authorEntity);
-        return authorMapper.mapTo(savedAuthorEntity);
+        return new ResponseEntity<>(authorMapper.mapTo(savedAuthorEntity), HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public List<AuthorDto> getAuthors(){
+        List<AuthorEntity> authors = authorService.findAll();
+       return authors.stream().map(authorMapper::mapTo)
+               .collect(Collectors.toList());
     }
 
 }
