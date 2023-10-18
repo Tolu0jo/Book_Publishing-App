@@ -2,6 +2,8 @@ package com.example.publisher.services;
 
 import com.example.publisher.entitities.BookEntity;
 import com.example.publisher.repositories.BookRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,6 +26,11 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<BookEntity> findAll() {
         return (List<BookEntity>) bookRepository.findAll();
+    }
+
+    @Override
+    public Page<BookEntity> findAll(Pageable pageable) {
+        return bookRepository.findAll(pageable);
     }
 
     @Override
